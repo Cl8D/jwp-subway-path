@@ -11,6 +11,7 @@ public enum ErrorCode {
     STATION_NOT_FOUND("역 정보가 존재하지 않습니다."),
     STATION_NAME_DUPLICATED("역 이름은 중복될 수 없습니다"),
     STATION_NAME_LENGTH("역 이름 길이는 3~10여야 합니다."),
+    STATION_DELETE_IF_EXISTS_SECTION("구간에 해당 역 정보가 존재하기 때문에 제거할 수 없습니다."),
     SECTION_DISTANCE("거리는 최소 1부터 최대 50까지 가능합니다."),
     SECTION_ADD_STATION_NOT_EXISTS("존재하지 않는 역을 추가할 수 없습니다."),
     SECTION_ALREADY_ADD("이미 추가된 구간입니다."),

@@ -23,6 +23,6 @@ CREATE TABLE IF NOT EXISTS section
     distance int NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(line_id) REFERENCES line(id) ON DELETE CASCADE,
-    FOREIGN KEY(source_station_id) REFERENCES station(id) ON DELETE CASCADE,
-    FOREIGN KEY(target_station_id) REFERENCES station(id) ON DELETE CASCADE
+    FOREIGN KEY(source_station_id) REFERENCES station(id),
+    FOREIGN KEY(target_station_id) REFERENCES station(id)
 );

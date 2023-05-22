@@ -3,6 +3,7 @@ package subway.dao;
 import java.util.List;
 import java.util.Optional;
 import javax.sql.DataSource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,6 +12,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import subway.dao.entity.StationEntity;
+import subway.exception.BadRequestException;
+import subway.exception.ErrorCode;
 
 @Repository
 public class StationDao {
@@ -57,8 +60,12 @@ public class StationDao {
     }
 
     public int deleteById(final Long id) {
-        final String sql = "DELETE FROM station WHERE id = ?";
-        return jdbcTemplate.update(sql, id);
+        try {
+            final String sql = "DELETE FROM station WHERE id = ?";
+            return jdbcTemplate.update(sql, id);
+        } catch (final DataIntegrityViolationException e) {
+            throw new BadRequestException(ErrorCode.STATION_DELETE_IF_EXISTS_SECTION);
+        }
     }
 
     public boolean existByName(final String name) {
